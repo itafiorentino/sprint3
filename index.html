@@ -27,8 +27,8 @@
 					 </button>
 					 <ul class="navbar-nav me-3 me-lg-0 d-flex flex-row align-items-center">
 						 <li class="dropdown search-dropdown nav-item py-lg-3">						 
-							 <a href="javascript:void(0)" class="btn btn-outline-dark flex-center" type="button" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="open_modal()" data-bs-auto-close="outside">
-								<i class="fas fa-shopping-cart me-1"></i> Cart <span class="badge bg-dark text-white ms-1 rounded-pill" id="count_product">0</span>
+							 <a href="javascript:void(0)" class="btn btn-outline-dark flex-center" type="button" id= "cartButton" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="open_modal()" data-bs-auto-close="outside">
+				  			<i class="fas fa-shopping-cart me-1"></i> Cart <span class="badge bg-dark text-white ms-1 rounded-pill" id="count_product">0</span>
 							 </a>
 						 </li>
 					 </ul>
@@ -52,6 +52,7 @@
 			 </div>
 		 </nav>
 
+
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
@@ -61,9 +62,11 @@
                 </div>
             </div>
         </header>
-		<!-- Section-->
+
+		<!-- Section GROCERY-->
 		<section class="pt-5" id="grocery">
 			<h2 class="text-center"><i class="fas fa-shopping-basket pe-3"></i>Grocery</h2>
+
 			<div class="container px-4 px-lg-5 mt-5">
 				<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 					<div class="col mb-5">
@@ -112,6 +115,8 @@
 				</div>
 			</div>
 		</section>
+
+	<!-- Section BEAUTY-->
 		<section class="pt-5" id="beauty">
 			 <h2 class="text-center"><i class="fas fa-heart pe-3"></i>Beauty</h2>
 			<div class="container px-4 px-lg-5 mt-5">
@@ -162,6 +167,9 @@
 				</div>
 			</div>
 		</section>
+
+
+		<!-- Section CLOTHES-->
 		<section class="pt-5" id="clothes">
 			 <h2 class="text-center"><i class="fas fa-tshirt pe-3"></i>Clothes</h2>
 			<div class="container px-4 px-lg-5 mt-5">
@@ -213,10 +221,13 @@
 			</div>
 		</section>
 	
+
         <!-- Footer-->
         <footer class="py-3 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
         </footer>
+
+		<!-- CART POP UP-->
 		
 		<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
@@ -277,3 +288,4 @@
 		<script src="js/checkout.js"></script>
     </body>
 </html>
+
