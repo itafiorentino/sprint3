@@ -1,10 +1,9 @@
 
-
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
 var products = [
     {
          id: 1,
-         name: 'cooking oil',
+         name: 'Cooking oil',
          price: 10.5,
          type: 'grocery',
          offer: {
@@ -67,11 +66,9 @@ var products = [
  ]
  // Array with products (objects) added directly with push(). Products in this array are repeated.
  var cartList = [];
- //console.log(cartList);
  
  // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
  var cart = [];
- //console.log(cart);
  
  var total = 0;
  
@@ -94,8 +91,6 @@ var products = [
  
      console.log("Current cartList:", cartList);
      console.log ("the total price is:", calculateTotal());
-     let totalPriceSpan = document.getElementById("total_price");
-     totalPriceSpan.textContent = calculateTotal();
  
  }
  
@@ -109,15 +104,14 @@ var products = [
  
  // Exercise 3
  function calculateTotal() {
-     // Calculate total price of the cart using the "cartList" array
+     // Calculate total price of the cartList
      let sumPrices = 0;
      for (let i = 0; i < cartList.length; i++) {
          sumPrices += cartList[i].price;
      }
      return sumPrices;
  }
- 
-     // call function
+
      const totalPrice = calculateTotal();
      console.log("the total price is:", totalPrice);
  
@@ -149,7 +143,7 @@ var products = [
          }
      }
  
-     var cart = Object.values(itemCount);
+     var cart = Object.values(itemCount); // REDECLARED CART VARIABLE, IS IT PUSHING THE OBJECTS TO THE GLOBAR CART ARRAY??????? IDTHINK SO, ITS MAKING A NEW ARRAY, FIX!
  
      console.log("Current cart: ", cart);
      console.log("cartList after generateCart(): ", cartList);
@@ -168,7 +162,6 @@ var products = [
 
        for (let i = 0; i < cart.length; i++) {
       const product = cart[i];
-      //console.log(`Checking product ${i + 1}: id = ${product.id}`);
 
       if (product.id == 1 && product.quantity % 3 == 0) {
          console.log("applyPromotionsCart(cart): id 1 found");
@@ -180,29 +173,98 @@ var products = [
         console.log("applyPromotionsCart(cart): id 1 found");
         product.subtotal = product.price * product.quantity;
         product.subtotalWithDiscount = product.subtotal - (0.3 * product.subtotal);
-        console.log("subtotal of oil is: " + product.subtotalWithDiscount);
+        console.log("subtotal of cupcake mixture is: " + product.subtotalWithDiscount);
         }
+
+        else {
+            product.subtotal = product.price * product.quantity;
+            product.subtotalWithDiscount = product.subtotal;
+            console.log("subtotal of else products is: " + product.subtotalWithDiscount);
+            }
     
  }
- }
 
-  //CALL generateCart() and applyPromotionsCart()
-  document.getElementById("cartButton").addEventListener("click", function buttonClickHandler() {
-    const generatedCart = generateCart(); 
-    applyPromotionsCart(generatedCart); 
- });
- 
- 
- 
- 
+ }
 
  
  // Exercise 6
- function printCart() {
-     // Fill the shopping cart modal manipulating the shopping cart dom
+ function printCart(cart) {
+ // Fill the shopping cart modal manipulating the shopping cart dom
+
+    console.log("printCart is working: ", cart);
+
+    const tableBody = document.getElementById("cart_list");
+    let total = 0;
+
+    cart.forEach(product => {
+        const row = document.createElement("tr");
+        
+        const nameCell = document.createElement("td");
+        const productName = document.createElement("strong");
+        productName.textContent = product.name;
+        nameCell.appendChild(productName);
+        row.appendChild(nameCell);
+        
+        const priceCell = document.createElement("td");
+        priceCell.textContent = `$${product.price}`;
+        row.appendChild(priceCell);
+        
+        const qtyCell = document.createElement("td");
+        qtyCell.textContent = product.quantity;
+        row.appendChild(qtyCell);
+        
+        const totalCell = document.createElement("td");
+        totalCell.textContent = `$${product.subtotalWithDiscount}`;
+        row.appendChild(totalCell);
+        
+        tableBody.appendChild(row);
+
+        //sum totals with discount
+        total += product.subtotalWithDiscount;
+        console.log("total is: ", total);
+
+        //print the total with discounts in modal/cart
+        let totalPriceSpan = document.getElementById("total_price");
+        totalPriceSpan.textContent = total;
+
+    });
+
+
+
+
  }
  
+
+   //CALL generateCart(), applyPromotionsCart() and printCart() on cartButton CLICK
+
+   document.getElementById("cartButton").addEventListener("click", function buttonClickHandler() {
+    const generatedCart = generateCart(); 
+    applyPromotionsCart(generatedCart);
+
+    console.log("Generated cart:", generatedCart);
+    printCart(generatedCart); 
+    // CART IS BEIGN PRINTED AGAIN WITH EVERY CARTBUTTON CLICK, ARRAY IS BEIGN UPDATED BUT ELEMENTS PRINTED IN CART SHOULD BE DELETED EVERY TIME THE MODAL CLOSES?
+
+ });
  
+
+ document.getElementById("closeCartButton").addEventListener("click", function closeCartButtonClickHandler() {
+    const tableBody = document.getElementById("cart_list");
+
+    while (tableBody.firstChild) {
+        tableBody.removeChild(tableBody.firstChild);
+    }
+
+ });
+ 
+
+
+
+
+
+
+
+
  // ** Nivell II **
  
  // Exercise 8
